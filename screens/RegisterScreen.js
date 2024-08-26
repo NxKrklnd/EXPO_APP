@@ -1,0 +1,137 @@
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+const RegisterScreen = ({ navigation }) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleRegister = () => {
+    // Add your registration logic here
+    console.log('Register button clicked');
+    console.log('Username:', username);
+    console.log('Password:', password);
+  };
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.logoContainer}>
+        <Text style={styles.logoText}>KAZERVANT</Text>
+        <Text style={styles.subText}>TECHNOLOGIES</Text>
+      </View>
+
+      <View style={styles.inputContainer}>
+        <Icon name="user" size={20} color="#aaa" style={styles.icon} />
+        <TextInput
+          style={styles.input}
+          placeholder="Username"
+          placeholderTextColor="#aaa"
+          value={username}
+          onChangeText={(text) => setUsername(text)}
+        />
+      </View>
+
+      <View style={styles.inputContainer}>
+        <Icon name="lock" size={20} color="#aaa" style={styles.icon} />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          placeholderTextColor="#aaa"
+          secureTextEntry={true}
+          value={password}
+          onChangeText={(text) => setPassword(text)}
+        />
+      </View>
+
+      <View style={styles.inputContainer}>
+        <Icon name="lock" size={20} color="#aaa" style={styles.icon} />
+        <TextInput
+          style={styles.input}
+          placeholder="Confirm Password"
+          placeholderTextColor="#aaa"
+          secureTextEntry={true}
+        />
+      </View>
+
+      <TouchableOpacity style={styles.registerButton} onPress={handleRegister}>
+        <Text style={styles.registerButtonText}>Register</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+        <Text style={styles.loginText}>Already have an account? Login here</Text>
+      </TouchableOpacity>
+
+      <Text style={styles.credText}>@2024 Kazervant Technologies. All Rights Reserved</Text>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'grey',
+  },
+  logoContainer: {
+    marginBottom: 50,
+    alignItems: 'center',
+  },
+  logoText: {
+    fontSize: 48,
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  subText: {
+    fontSize: 12,
+    color: 'white',
+    letterSpacing: 2,
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '80%',
+    height: 50,
+    backgroundColor: 'white',
+    borderRadius: 25,
+    paddingHorizontal: 20,
+    fontSize: 16,
+    marginBottom: 20,
+  },
+  icon: {
+    marginRight: 10,
+  },
+  input: {
+    flex: 1,
+  },
+  registerButton: {
+    width: '40%',
+    height: 50,
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 20,
+    borderWidth: 2,
+    borderColor: 'white',
+    backgroundColor: 'transparent',
+  },
+  registerButtonText: {
+    color: 'white',
+    fontSize: 18,
+  },
+  loginText: {
+    color: 'white',
+    marginTop: 20,
+    fontSize: 16,
+  },
+  credText: {
+    color: 'white',
+    marginTop: 40,
+    fontSize: 12,
+    textAlign: 'center',
+    position: 'absolute',
+    bottom: 30,
+  }
+});
+
+export default RegisterScreen;
