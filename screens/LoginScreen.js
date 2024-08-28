@@ -1,8 +1,20 @@
-import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome'; // Import Icon from react-native-vector-icons
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const LoginScreen = ({ navigation }) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = () => {
+    // This is a simple check. In a real app, you'd validate against a backend.
+    if (username === 'user' && password === 'password') {
+      navigation.navigate('Home');
+    } else {
+      Alert.alert('Login Failed', 'Invalid username or password');
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
@@ -16,6 +28,8 @@ const LoginScreen = ({ navigation }) => {
           style={styles.input}
           placeholder="Username"
           placeholderTextColor="#aaa"
+          value={username}
+          onChangeText={setUsername}
         />
       </View>
 
@@ -26,10 +40,12 @@ const LoginScreen = ({ navigation }) => {
           placeholder="Password"
           placeholderTextColor="#aaa"
           secureTextEntry={true}
+          value={password}
+          onChangeText={setPassword}
         />
       </View>
 
-      <TouchableOpacity style={styles.loginButton}>
+      <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
         <Text style={styles.loginButtonText}>Login</Text>
       </TouchableOpacity>
 
@@ -47,7 +63,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'grey',
+    backgroundColor: '#3498db',
   },
   logoContainer: {
     marginBottom: 50,
