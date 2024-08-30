@@ -1,16 +1,48 @@
-import React from 'react';
-import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, Image } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, Image, Modal, Alert, } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 const HomeScreen = ({ navigation }) => {
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const handleLogout = () => {
+    setModalVisible(false); // Close the modal before logging out
+    // Implement your logout functionality here
+    Alert.alert("Logout", "You have been logged out.", [
+      { text: "OK", onPress: () => navigation.replace('StartupScreen') }
+    ]);
+  };
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
+      {/* Modal acting as a drawer */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={isModalVisible}
+        onRequestClose={toggleModal}
+      >
+        <View style={styles.modalContainer}>
+          <TouchableOpacity onPress={toggleModal} style={styles.modalCloseButton}>
+            <Ionicons name="close-outline" size={24} color="black" />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleLogout} style={styles.modalMenuItem}>
+            <Ionicons name="log-out-outline" size={24} color="black" />
+            <Text>Logout</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
+
       <ScrollView contentContainerStyle={styles.scrollView}>
         <View style={styles.header}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={toggleModal}>
             <Ionicons name="menu-outline" size={24} color="white" />
           </TouchableOpacity>
-          <Image source={require('../assets/kzvnt_tech_800x800.png')} style={styles.logo} />
+          <Image source={require('../assets/app_logo.png')} style={styles.logo} />
           <TouchableOpacity>
             <Ionicons name="search-outline" size={24} color="white" />
           </TouchableOpacity>
@@ -55,6 +87,7 @@ const HomeScreen = ({ navigation }) => {
         </View>
       </ScrollView>
 
+      {/* Bottom navigation bar */}
       <View style={styles.bottomNav}>
         <TouchableOpacity style={styles.navItem}>
           <Ionicons name="home-outline" size={24} color="black" />
@@ -93,9 +126,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   logo: {
-    maxWidth: 200,
-    maxHeight: 200,
-    width: 50,
+    width: 150,
     height: 50,
     resizeMode: 'contain',
   },
@@ -155,6 +186,33 @@ const styles = StyleSheet.create({
   },
   navItem: {
     alignItems: 'center',
+  },
+  modalContainer: {
+    flex: 1,
+    marginTop: 60, // Adjust as needed to position below the status bar
+    backgroundColor: 'white',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    padding: 20,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalCloseButton: {
+    alignItems: 'flex-end',
+    marginBottom: 20,
+  },
+  modalMenuItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#eaeaea',
   },
 });
 

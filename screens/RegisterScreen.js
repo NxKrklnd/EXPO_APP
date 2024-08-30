@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const RegisterScreen = ({ navigation }) => {
@@ -15,10 +15,12 @@ const RegisterScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.logoContainer}>
-        <Text style={styles.logoText}>KAZERVANT</Text>
-        <Text style={styles.subText}>TECHNOLOGIES</Text>
-      </View>
+      {/* Image Logo */}
+      <Image
+        source={require('../assets/app_logo.png')}  // Replace with your image path
+        style={styles.logoImage}
+        resizeMode="contain"
+      />
 
       <View style={styles.inputContainer}>
         <Icon name="user" size={20} color="#aaa" style={styles.icon} />
@@ -73,19 +75,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#3498db',
   },
-  logoContainer: {
-    marginBottom: 50,
-    alignItems: 'center',
-  },
-  logoText: {
-    fontSize: 48,
-    color: 'white',
-    fontWeight: 'bold',
-  },
-  subText: {
-    fontSize: 12,
-    color: 'white',
-    letterSpacing: 2,
+  logoImage: {
+    width: 250,  // Adjust the width according to your design
+    height: 150, // Adjust the height according to your design
+    marginBottom: 20,
   },
   inputContainer: {
     flexDirection: 'row',
