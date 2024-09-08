@@ -157,11 +157,11 @@ const styles = StyleSheet.create({
   categoriesContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 20,
+    marginBottom: 15,
   },
   categoryItem: {
     backgroundColor: 'white',
-    padding: 35,
+    padding: 20,
     borderRadius: 20,
     alignItems: 'center',
   },
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
   },
   personnelItem: {
     backgroundColor: 'white',
-    padding: 30,
+    padding: 20,
     borderRadius: 50,
   },
   bottomNav: {
