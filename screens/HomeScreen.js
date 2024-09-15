@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, Image, Modal, Alert, } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, Image, Modal, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 const HomeScreen = ({ navigation }) => {
   const [isModalVisible, setModalVisible] = useState(false);
 
   const handleLogout = () => {
-    setModalVisible(false); // Close the modal before logging out
-    // Implement your logout functionality here
+    setModalVisible(false);
     Alert.alert("Logout", "You have been logged out.", [
       { text: "OK", onPress: () => navigation.replace('StartupScreen') }
     ]);
@@ -32,7 +31,7 @@ const HomeScreen = ({ navigation }) => {
           </TouchableOpacity>
           <TouchableOpacity onPress={handleLogout} style={styles.modalMenuItem}>
             <Ionicons name="log-out-outline" size={24} color="black" />
-            <Text>Logout</Text>
+            <Text style={styles.modalMenuItemText}>Logout</Text>
           </TouchableOpacity>
         </View>
       </Modal>
@@ -48,62 +47,78 @@ const HomeScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
 
-        <Text style={styles.welcome}>Welcome to our app, Lorem!</Text>
+        <Text style={styles.welcome}>Welcome to our app!</Text>
 
         <View style={styles.promoContainer}>
-          <Text style={styles.promoText}>Promotional Advertisement</Text>
+          <Text style={styles.promoText}>KVNT LOGO</Text>
         </View>
 
-        <Text style={styles.sectionTitle}>Categories</Text>
-        <View style={styles.categoriesContainer}>
-          <TouchableOpacity style={styles.categoryItem}>
-            <Ionicons name="build-outline" size={50} color="black" />
-            <Text>Repair</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.categoryItem}>
-            <Ionicons name="clipboard-outline" size={50} color="black" />
-            <Text>Check-Up</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.categoryItem}>
-            <Ionicons name="brush-outline" size={50} color="black" />
-            <Text>Cleaning</Text>
-          </TouchableOpacity>
-        </View>
+        <Text style={styles.sectionTitle}>Our Services</Text>
 
-        <Text style={styles.sectionTitle}>Available Personnels</Text>
-        <View style={styles.personnelsContainer}>
-          {[1, 2, 3, 4].map((item) => (
-            <TouchableOpacity key={item} style={styles.personnelItem}>
-              <Ionicons name="person-circle-outline" size={40} color="gray" />
-            </TouchableOpacity>
-          ))}
-        </View>
-        <View style={styles.personnelsContainer}>
-          {[1, 2, 3, 4].map((item) => (
-            <TouchableOpacity key={item} style={styles.personnelItem}>
-              <Ionicons name="person-circle-outline" size={40} color="gray" />
-            </TouchableOpacity>
-          ))}
-        </View>
+        {/* Swipeable services */}
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} contentContainerStyle={styles.servicesScrollView}>
+          {/* Larger Repair Service */}
+          <TouchableOpacity style={[styles.largeServiceItem, { width: 180, padding: 35 }]}>
+            <Ionicons name="build-outline" size={90} color="#3498db" />
+            <Text style={styles.serviceText}>Repair</Text>
+          </TouchableOpacity>
+          {/* Other Services */}
+          <TouchableOpacity style={[styles.serviceItem, { width: 160, padding: 30 }]}>
+            <Ionicons name="clipboard-outline" size={70} color="#3498db" />
+            <Text style={styles.serviceText}>Check-Up</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.serviceItem, { width: 160, padding: 30 }]}>
+            <Ionicons name="brush-outline" size={70} color="#3498db" />
+            <Text style={styles.serviceText}>Cleaning</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.serviceItem, { width: 160, padding: 30 }]}>
+            <Ionicons name="car-outline" size={70} color="#3498db" />
+            <Text style={styles.serviceText}>Car Wash</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.serviceItem, { width: 160, padding: 30 }]}>
+            <Ionicons name="home-outline" size={70} color="#3498db" />
+            <Text style={styles.serviceText}>Home Repair</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.serviceItem, { width: 160, padding: 30 }]}>
+            <Ionicons name="bicycle-outline" size={70} color="#3498db" />
+            <Text style={styles.serviceText}>Bike Maintenance</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.serviceItem, { width: 160, padding: 30 }]}>
+            <Ionicons name="hammer-outline" size={70} color="#3498db" />
+            <Text style={styles.serviceText}>Construction</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.serviceItem, { width: 160, padding: 30 }]}>
+            <Ionicons name="fast-food-outline" size={70} color="#3498db" />
+            <Text style={styles.serviceText}>Food Delivery</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.serviceItem, { width: 160, padding: 30 }]}>
+            <Ionicons name="man-outline" size={70} color="#3498db" />
+            <Text style={styles.serviceText}>Personal Assistant</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.serviceItem, { width: 160, padding: 30 }]}>
+            <Ionicons name="medkit-outline" size={70} color="#3498db" />
+            <Text style={styles.serviceText}>Healthcare</Text>
+          </TouchableOpacity>
+        </ScrollView>
       </ScrollView>
 
       {/* Bottom navigation bar */}
       <View style={styles.bottomNav}>
         <TouchableOpacity style={styles.navItem}>
           <Ionicons name="home-outline" size={24} color="black" />
-          <Text>Home</Text>
+          <Text style={styles.navText}>Home</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.navItem}>
           <Ionicons name="cart-outline" size={24} color="black" />
-          <Text>Shop</Text>
+          <Text style={styles.navText}>Shop</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.navItem}>
           <Ionicons name="mail-outline" size={24} color="black" />
-          <Text>Inbox</Text>
+          <Text style={styles.navText}>Inbox</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.navItem}>
           <Ionicons name="person-outline" size={24} color="black" />
-          <Text>Profile</Text>
+          <Text style={styles.navText}>Profile</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -138,14 +153,18 @@ const styles = StyleSheet.create({
     marginBottom: 25,
   },
   promoContainer: {
-    backgroundColor: 'white',
-    padding: 70,
+    backgroundColor: '#fff',
+    padding: 50,
     borderRadius: 20,
     marginBottom: 20,
+    shadowColor: '#000',
+    shadowOpacity: 0.2,
+    shadowRadius: 10,
+    elevation: 5,
   },
   promoText: {
     textAlign: 'center',
-    color: 'gray',
+    color : 'gray',
   },
   sectionTitle: {
     fontStyle: 'normal',
@@ -154,53 +173,69 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 25,
   },
-  categoriesContainer: {
+  servicesScrollView: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 15,
+    paddingLeft: 10,
   },
-  categoryItem: {
-    backgroundColor: 'white',
-    padding: 20,
+  largeServiceItem: {
+    backgroundColor: '#fff',
+    padding: 35, 
     borderRadius: 20,
     alignItems: 'center',
+    justifyContent: 'center', 
+    shadowColor: '#000',
+    shadowOpacity: 0.2,
+    shadowRadius: 10,
+    elevation: 5,
+    marginRight: 15,
+    width: 180, 
   },
-  personnelsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 10,
-    marginBottom: 20,
+  serviceItem: {
+    backgroundColor: '#fff',
+    padding: 30, 
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center', 
+    shadowColor: '#000',
+    shadowOpacity: 0.2,
+    shadowRadius: 10,
+    elevation: 5,
+    marginRight: 15,
+    width: 160, 
   },
-  personnelItem: {
-    backgroundColor: 'white',
-    padding: 20,
-    borderRadius: 50,
+  serviceText: {
+    color: '#3498db',
+    marginTop: 5,
+    textAlign: 'center', 
   },
   bottomNav: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: 'white',
-    padding: 10,
+    backgroundColor: '#fff',
+    padding: 15,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    elevation: 5,
   },
   navItem: {
     alignItems: 'center',
   },
+  navText: {
+    color: '#3498db',
+  },
   modalContainer: {
     flex: 1,
-    marginTop: 60, // Adjust as needed to position below the status bar
-    backgroundColor: 'white',
+    marginTop: 60,
+    backgroundColor: '#fff',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     padding: 20,
     shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
+    shadowOpacity: 0.2,
+    shadowRadius: 10,
     elevation: 5,
   },
   modalCloseButton: {
@@ -213,6 +248,11 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     borderBottomWidth: 1,
     borderBottomColor: '#eaeaea',
+  },
+  modalMenuItemText: {
+    marginLeft: 10,
+    fontSize: 16,
+    color: '#3498db',
   },
 });
 
