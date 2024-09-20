@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet, Alert } from 'react-native';
 
 const StartupScreen = ({ navigation }) => {
   useEffect(() => {
@@ -10,6 +10,13 @@ const StartupScreen = ({ navigation }) => {
 
     return () => clearTimeout(timer); // Clear the timer if the component is unmounted
   }, [navigation]);
+
+  // Handle logout action when OK is pressed after clicking Logout
+  const handleLogout = () => {
+    Alert.alert("Logout", "You have been logged out.", [
+      { text: "OK", onPress: () => navigation.replace('StartupScreen') }
+    ]);
+  };
 
   return (
     <View style={styles.container}>
